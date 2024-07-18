@@ -1,13 +1,10 @@
-import torch
 from silero_vad import get_speech_timestamps, load_silero_vad
 from silero_vad.utils_vad import (
     read_audio,
     get_speech_timestamps,
 )
-
-from typing import Union, Annotated
-from fastapi import FastAPI, File, UploadFile
-from pydantic import BaseModel, PositiveInt, PositiveFloat
+from fastapi import FastAPI, UploadFile
+from pydantic import BaseModel, PositiveFloat
 
 app = FastAPI()
 
