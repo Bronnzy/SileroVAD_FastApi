@@ -30,6 +30,6 @@ uvicorn vad_check_api:app --host 0.0.0.0 --port 4499
 Open your browser and navigate to http://localhost:8000/docs to explore the interactive API documentation provided by Swagger UI.
 
 ## API Endpoints
-- POST /vad_check: Accepts an audio file and indicates if speech detected and returns segments of detected speech.
+- POST /vad_check/: Accepts an audio file and indicates if speech detected and returns segments of detected speech.
   - Request: multipart/form-data with an audio file.
   - Response: JSON with boolean to tell if audio has speech and timestamps of detected speech segments.
