@@ -8,13 +8,16 @@ from pydantic import BaseModel, PositiveFloat
 
 app = FastAPI()
 
+
 class TimeStamps(BaseModel):
     start: PositiveFloat = 0
     end: PositiveFloat = 0
 
+
 class Response(BaseModel):
     has_voice: bool
     speech_timestamps: list[TimeStamps] = [TimeStamps()]
+
 
 @app.post("/vad_check/")
 async def vad_check(file: UploadFile) -> Response:
@@ -28,8 +31,6 @@ async def vad_check(file: UploadFile) -> Response:
     speech_timestamps = get_speech_timestamps(wav, model, return_seconds=True)
 
     has_voice = bool(speech_timestamps)
-    
-    print(has_voice)
 
     response = Response(has_voice=has_voice, speech_timestamps=speech_timestamps)
     return response
