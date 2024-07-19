@@ -10,7 +10,7 @@ from pydantic import BaseModel, PositiveFloat
 
 app = FastAPI()
 
-origins = {"http://localhost", "http://localhost:4499"}
+origins = {"http://localhost", "http://localhost:4499", "http://localhost:3000"}
 
 app.add_middleware(
     CORSMiddleware,
