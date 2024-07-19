@@ -11,7 +11,7 @@ import io
 
 app = FastAPI()
 
-origins = {"http://localhost", "http://localhost:4499", "*"}
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
