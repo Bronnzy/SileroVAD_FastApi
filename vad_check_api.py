@@ -3,8 +3,7 @@ from silero_vad.utils_vad import (
     read_audio,
     get_speech_timestamps,
 )
-import uvicorn
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, PositiveFloat
 import io
@@ -20,6 +19,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+model = load_silero_vad()
 
 
 class TimeStamps(BaseModel):
@@ -37,8 +38,18 @@ async def vad_check(request: Request) -> Response:
     buffer = await request.body()
     file_like_object = io.BytesIO(buffer)
     has_voice = False
-    model = load_silero_vad()
     audio_path = file_like_object
+    wav = read_audio(audio_path)
+    speech_timestamps = get_speech_timestamps(wav, model, return_seconds=True)
+    has_voice = bool(speech_timestamps)
+    response = Response(has_voice=has_voice, speech_timestamps=speech_timestamps)
+    return response
+
+
+@app.post("/vad_check_file/")
+async def vad_check_file(file: UploadFile) -> Response:
+    model = load_silero_vad()
+    audio_path = file.file
     wav = read_audio(audio_path)
     speech_timestamps = get_speech_timestamps(wav, model, return_seconds=True)
     has_voice = bool(speech_timestamps)
