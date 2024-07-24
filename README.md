@@ -33,7 +33,7 @@ Open your browser and navigate to http://localhost:4499/docs to explore the inte
 - POST /vad_check/: Accepts audio/video buffer(blob) and indicates if speech detected and returns segments of detected speech.
   - Request
     - Content-Type: multipart/form-data
-    - Body: An audio file (e.g., WAV format) uploaded using a form field named file.
+    - Body: An audio file (e.g., WAV format) uploaded using a form field named 'file'.
   - Response
     - Content-Type: application/json
     - Body: A JSON object containing:
