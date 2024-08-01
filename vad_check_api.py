@@ -40,10 +40,10 @@ class Response(BaseModel):
 @app.post("/vad_check/")
 async def vad_check(request: Request) -> Response:
     """
-    Endpoint to check for voice activity in raw audio data from a request body.
+    Endpoint to check for voice activity in raw audio/video data from a request body.
     
     Parameters:
-    - request: FastAPI Request object containing raw audio data.
+    - request: FastAPI Request object containing raw audio/video data.
 
     Returns:
     - Response: A JSON object indicating if speech was detected and the timestamps of speech segments.
@@ -61,10 +61,10 @@ async def vad_check(request: Request) -> Response:
 @app.post("/vad_check_file/")
 async def vad_check_file(file: UploadFile) -> Response:
     """
-    Endpoint to check for voice activity in an uploaded audio file.
+    Endpoint to check for voice activity in an uploaded audio/video file.
 
     Parameters:
-    - file: FastAPI UploadFile object containing the audio file.
+    - file: FastAPI UploadFile object containing the file.
 
     Returns:
     - Response: A JSON object indicating if speech was detected and the timestamps of speech segments.
